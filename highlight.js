@@ -43,7 +43,7 @@ function highlight(option){
             }else if(typeof searchText === "string"){
                 var reg = new RegExp(searchText,"gim");
             }else{
-                throw new Error("sorry,your Matching format is error,you should users string or regexp");
+                throw new Error("sorry,your Matching format is error,you should uses string or regexp");
             }
             if(reg.test(node.textContent)){
                 var content=node.textContent.replace(reg,function(){
