@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="highlight.js"></script>
+</head>
+<body>
+    <label for="search">查询:</label>
+    <input id="search" value="/(\w)\d/g">
+    <small>回车查询,可以使用字符串或正则表达式的字符串</small>
+    <div id="container">
+        <ul>
+            <li>aaaa</li>
+            <li>bcade</li>
+            <li>cmmda</li>
+            <li>dasdfd</li>
+            <li>easdf3</li>
+            <li>fadsf</li>
+            <li>ggfj</li>
+            <li>fgfhgjh</li>
+            <li>tfyi</li>
+            <li>jfhdd中国a</li>
+        </ul>
+    </div>
+    <script>
+        document.querySelector("#search").addEventListener("keyup",function(e){
+            if(e.keyCode==13){
+                if(!this.value){
+                    return;
+                }
+                var regexp;
+                try{
+                    regexp =eval(this.value);
+                }catch (e){
+                    regexp=this.value;
+                }
+                highlight({
+                    container:document.querySelector("#container"),
+                    searchText:regexp,
+                    formatter:function(match){
+                        var ps = Array.prototype.slice.call(arguments,1,arguments.length-2);
+                        var offset = arguments[arguments.length-2];
+                        var string = arguments[arguments.length-1];
+                        console.log(match,ps,offset,string);
+                        return "<span style='color:red'>"+match+"</span>";
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>
